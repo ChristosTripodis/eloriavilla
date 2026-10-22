@@ -262,6 +262,20 @@ footer small{display:block;margin-top:12px;max-width:44ch;line-height:1.6}
 .lb .n{right:calc(14px + env(safe-area-inset-right,0px));top:calc(50% - 24px)}
 @media (max-width:700px){.lb .p,.lb .n{top:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px))}}
 </style>
+<script>
+/* Finds photos whether they sit next to index.html or inside an img/ folder */
+document.addEventListener('error',function(e){
+  var el=e.target; if(!el||el.dataset.tried) return;
+  if(!/^(IMG|VIDEO)$/.test(el.tagName)) return;
+  el.dataset.tried='1';
+  function swap(u){ if(!u) return u; return u.indexOf('img/')===0 ? u.slice(4) : 'img/'+u; }
+  var pic=el.parentNode&&el.parentNode.tagName==='PICTURE'?el.parentNode:null;
+  if(pic){ pic.querySelectorAll('source').forEach(function(s){ s.setAttribute('srcset',swap(s.getAttribute('srcset'))); }); }
+  if(el.tagName==='VIDEO' && el.getAttribute('poster')) el.setAttribute('poster',swap(el.getAttribute('poster')));
+  el.setAttribute('src',swap(el.getAttribute('src')));
+  if(el.tagName==='VIDEO') el.load();
+},true);
+</script>
 </head>
 <body>
 <header id="hdr">
