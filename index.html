@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eloria Villa</title>
+<meta property="og:title" content="Eloria · Villa in Vamos, Crete">
+<meta property="og:description" content="A minimal Mediterranean villa in Vamos, Crete. Opening soon.">
+<meta property="og:image" content="https://eloriavilla.com/hero-wide.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%2346523A%22/%3E%3Cpath d=%22M20 52V30a12 12 0 0 1 24 0v22%22 fill=%22none%22 stroke=%22%23F3F2EC%22 stroke-width=%225%22/%3E%3C/svg%3E">
+<meta name="description" content="Eloria, a minimal Mediterranean villa in Vamos, Crete. Under construction, opening soon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+[hidden]{display:none!important}
+/* Layout: image-led single scroll. Full-bleed hero with the name carved large over the render,
+   offset editorial image pairs, a full-bleed quote band, room cards, a two-set gallery,
+   and a dark closing band. Limewash ground, olive ink, dry-stone neutrals. */
+:root{
+  --lime:#F3F2EC;      /* limewash wall */
+  --plaster:#E8E7DF;   /* shaded plaster */
+  --card:#FCFCF8;      /* detail cards */
+  --grove:#46523A;     /* deep olive grove */
+  --slate:#4E6170;     /* Lefka Ori slate */
+  --sand:#D2BE94;      /* Cretan limestone, warm */
+  --on-color:#F3F2EC;
+  --r:16px;            /* soft corners on photos and cards */
+  --ink:#1D221E;       /* olive-black */
+  --muted:#60675E;     /* olive-grey */
+  --olive:#56653F;     /* olive leaf */
+  --stone:#B8B2A4;     /* dry-stone */
+  --line:#D7D5CC;
+  --night:#161A17;     /* closing band, same in both themes */
+  --on-night:#ECEBE4;
+  --on-photo:#FFFFFF;
+  --display:"Marcellus","Trajan Pro",Georgia,serif;
+  --body:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --lime:#131613;--plaster:#1C201C;--card:#1D211D;--grove:#3C4732;--slate:#44566A;--sand:#8F7D58;--ink:#ECEBE4;--muted:#A2A79C;--olive:#AABB89;--stone:#6C685E;--line:#2C312B;--night:#0D0F0D;color-scheme:dark}}
+:root[data-theme="dark"]{--lime:#131613;--plaster:#1C201C;--card:#1D211D;--grove:#3C4732;--slate:#44566A;--sand:#8F7D58;--ink:#ECEBE4;--muted:#A2A79C;--olive:#AABB89;--stone:#6C685E;--line:#2C312B;--night:#0D0F0D;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--lime);color:var(--ink);font:400 17px/1.7 var(--body);margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--night)}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+@media (min-width:760px){.wrap{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--olive);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;letter-spacing:.01em}
+p{margin:0;max-width:62ch}
+.eyebrow{font:500 11.5px/1.4 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:500 14px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;padding:16px 26px;border:1px solid currentColor;transition:background .3s,color .3s}
+.btn:hover{background:var(--ink);color:var(--lime);border-color:var(--ink)}
+.btn.light{color:var(--on-photo)}
+.btn.light:hover{background:var(--on-photo);color:#1D221E;border-color:var(--on-photo)}
+.btn.fill{background:var(--on-photo);color:#1D221E;border-color:var(--on-photo)}
+.btn.fill:hover{background:transparent;color:var(--on-photo)}
+
+/* header: transparent over the hero, solid after scrolling */
+header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:20;color:var(--on-photo);transition:background .35s,color .35s,box-shadow .35s}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px;transition:padding .35s}
+header.solid{background:var(--lime);color:var(--ink);box-shadow:0 1px 0 var(--line)}
+header.solid .wrap{padding-block:14px}
+.mark{font:400 24px/1 var(--display);letter-spacing:.34em;text-decoration:none;text-transform:uppercase;padding-left:.34em}
+nav{display:flex;gap:30px;align-items:center;font:500 13px/1 var(--body);letter-spacing:.08em;text-transform:uppercase}
+nav a{text-decoration:none;opacity:.85}
+nav a:hover{opacity:1}
+nav .cta{opacity:1;border:1px solid currentColor;padding:11px 18px}
+.burger{display:none;background:none;border:0;color:inherit;width:44px;height:44px;padding:10px;cursor:pointer}
+.burger span{display:block;height:1.5px;background:currentColor;margin:6px 0}
+@media (max-width:900px){
+  .burger{display:block}
+  nav{position:fixed;inset:0;background:var(--night);color:var(--on-night);flex-direction:column;justify-content:center;gap:28px;font-size:16px;padding:max(24px,env(safe-area-inset-top,0px)) 24px max(24px,env(safe-area-inset-bottom,0px))}
+  nav:not(.open){display:none}
+  nav .close{position:absolute;top:calc(18px + env(safe-area-inset-top,0px));right:calc(18px + env(safe-area-inset-right,0px));background:none;border:0;color:inherit;font-size:30px;width:44px;height:44px;cursor:pointer}
+}
+@media (min-width:901px){nav .close{display:none}}
+
+/* hero */
+.hero{position:relative;height:clamp(600px,94svh,1000px);color:var(--on-photo);overflow:hidden;background:#3a4440}
+.hero picture,.hero picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%}
+.hero picture img{animation:settle 2.4s cubic-bezier(.2,.7,.2,1) both}
+@keyframes settle{from{transform:scale(1.06)}to{transform:scale(1)}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,17,15,.45) 0%,rgba(14,17,15,0) 22%,rgba(14,17,15,0) 45%,rgba(14,17,15,.72) 100%),linear-gradient(90deg,rgba(14,17,15,.35) 0%,rgba(14,17,15,0) 55%)}
+.hero .wrap{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding-block:0 44px}
+.hero .eyebrow{color:rgba(255,255,255,.85)}
+.hero h1{font-size:clamp(84px,17vw,260px);line-height:.82;letter-spacing:.06em;margin:16px 0 22px -.04em}
+.hero .lede{font:300 clamp(19px,2vw,24px)/1.45 var(--body);max-width:34ch;color:rgba(255,255,255,.92)}
+.hero-foot{display:flex;flex-wrap:wrap;gap:28px 40px;align-items:flex-end;justify-content:space-between;margin-top:34px;padding-top:24px;border-top:1px solid rgba(255,255,255,.3)}
+.stats{display:flex;flex-wrap:wrap;gap:18px 38px;list-style:none;margin:0;padding:0}
+.stats li{display:grid;gap:2px}
+.stats b{font:400 clamp(22px,2.4vw,30px)/1.1 var(--display);font-variant-numeric:tabular-nums}
+.stats span{font:400 11px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.78)}
+.status{display:inline-flex;align-items:center;gap:10px;font:500 11.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.status i{width:8px;height:8px;border-radius:50%;background:#C9D7A8;animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(201,215,168,.6)}70%{box-shadow:0 0 0 11px rgba(201,215,168,0)}100%{box-shadow:0 0 0 0 rgba(201,215,168,0)}}
+
+/* intro */
+section.block{padding-block:clamp(72px,10vw,140px)}
+.intro{display:grid;gap:48px}
+@media (min-width:960px){.intro{grid-template-columns:5fr 7fr;gap:80px}}
+.intro h2{font-size:clamp(36px,4.6vw,64px);line-height:1.08;margin-top:18px}
+.intro h2 em{font-style:normal;color:var(--olive)}
+.intro .prose{display:grid;gap:20px;font-size:18px;color:var(--muted);align-content:end}
+.intro .prose p:first-child{color:var(--ink);font-size:20px}
+.pair{display:grid;grid-template-columns:7fr 5fr;gap:clamp(14px,2.4vw,32px);margin-top:clamp(56px,8vw,110px);align-items:start}
+.pair figure{margin:0}
+.pair .b{margin-top:clamp(60px,12vw,180px)}
+.pair img{width:100%;object-fit:cover}
+.pair .a img{aspect-ratio:4/3}
+.pair .b img{aspect-ratio:4/5}
+.cap{margin-top:12px;font:400 11.5px/1.5 var(--mono);letter-spacing:.06em;color:var(--muted)}
+
+/* quote band */
+.band{position:relative;color:var(--on-photo);min-height:clamp(420px,62vw,680px);display:flex;align-items:center;overflow:hidden;background:#545a50}
+.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.band::after{content:"";position:absolute;inset:0;background:rgba(14,17,15,.48)}
+.band .wrap{position:relative;z-index:2;width:100%;padding-block:80px}
+.band blockquote{margin:0;font:400 clamp(30px,4.6vw,62px)/1.15 var(--display);max-width:20ch;text-wrap:balance}
+.band .eyebrow{color:rgba(255,255,255,.8);margin-top:26px}
+
+/* spaces */
+.head{display:grid;gap:16px;margin-bottom:clamp(40px,5vw,64px);max-width:760px}
+.head h2{font-size:clamp(36px,4.6vw,64px);line-height:1.06}
+.head p{color:var(--muted);font-size:18px}
+.rooms{display:grid;gap:clamp(28px,3vw,40px);grid-template-columns:1fr}
+@media (min-width:760px){.rooms{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.room{display:flex;flex-direction:column;gap:18px}
+.room .ph{overflow:hidden;background:var(--plaster)}
+.room img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.room:hover img{transform:scale(1.045)}
+.room .meta{font:500 11px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--olive)}
+.room h3{font-size:30px;line-height:1.1}
+.room p{color:var(--muted);font-size:16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:2px 0 0;padding:0}
+.tags li{font:400 12.5px/1 var(--body);padding:8px 12px;border:1px solid var(--line);color:var(--ink)}
+
+/* outdoors */
+.out{display:grid;gap:48px;align-items:center}
+@media (min-width:960px){.out{grid-template-columns:7fr 5fr;gap:80px}}
+.out figure{margin:0}
+.out img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.feat{list-style:none;padding:0;margin:8px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}
+.feat li{border-top:1px solid var(--line);padding:18px 0 20px;display:grid;gap:4px}
+.feat b{font:400 21px/1.2 var(--display)}
+.feat span{font-size:14.5px;color:var(--muted);line-height:1.5}
+
+/* gallery */
+.gal-top{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:flex-end;margin-bottom:34px}
+.gal-top .head{margin:0}
+.tabs{display:flex;gap:6px;border:1px solid var(--line);padding:5px}
+.tabs button{font:500 12.5px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;background:none;border:0;color:var(--muted);padding:12px 18px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--lime)}
+.grid{display:grid;gap:clamp(8px,1.2vw,14px);grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:dense}
+@media (min-width:900px){.grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(150px,17vw,230px)}}
+.grid figure{margin:0;position:relative;overflow:hidden;background:var(--plaster)}
+.grid button{all:unset;cursor:zoom-in;display:block;width:100%;height:100%}
+.grid button:focus-visible{outline:2px solid var(--olive);outline-offset:-2px}
+.grid img{width:100%;height:100%;object-fit:cover;aspect-ratio:1/1;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+@media (min-width:900px){.grid img{aspect-ratio:auto}}
+.grid figure:hover img{transform:scale(1.05)}
+.grid figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 12px;font-size:13.5px;line-height:1.35;color:#fff;background:linear-gradient(transparent,rgba(10,12,10,.7));pointer-events:none}
+.big{grid-column:span 2;grid-row:span 2}
+.tall{grid-row:span 2}
+.wide{grid-column:span 2}
+@media (max-width:899px){.big img,.wide img{aspect-ratio:16/11}.tall img{aspect-ratio:1/1}}
+
+/* location */
+.loc{background:var(--plaster)}
+.loc .inner{display:grid;gap:48px;align-items:start}
+@media (min-width:960px){.loc .inner{grid-template-columns:5fr 7fr;gap:80px}}
+.loc h2{font-size:clamp(36px,4.6vw,64px);line-height:1.06;margin-top:18px}
+.loc .prose{display:grid;gap:18px;color:var(--muted);font-size:17.5px}
+.loc .prose strong{color:var(--ink);font-weight:500}
+.near{list-style:none;padding:0;margin:6px 0 0;display:grid;gap:0}
+.near li{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding:14px 0;color:var(--ink)}
+.near li span{font:400 12px/1.6 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right}
+.coords{font:400 12.5px/1.6 var(--mono);letter-spacing:.06em;color:var(--muted)}
+.loc figure{margin:0}
+.loc img{width:100%;aspect-ratio:16/9;object-fit:cover}
+
+/* contact */
+.closing{background:var(--night);color:var(--on-night)}
+.closing .wrap{padding-block:clamp(80px,11vw,150px)}
+.closing .eyebrow{color:#9FA699}
+.closing h2{font-size:clamp(44px,7vw,104px);line-height:1;margin:18px 0 26px;max-width:14ch}
+.closing p{color:#B9BDB3;font-size:18px}
+.cards{display:grid;gap:0;margin-top:52px;grid-template-columns:1fr;border-top:1px solid #343a33}
+@media (min-width:760px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.card{padding:24px 24px 26px 0;display:grid;gap:8px;border-bottom:1px solid #343a33}
+.card .eyebrow{color:#8E9589}
+.card .v{font:400 20px/1.4 var(--display);word-break:break-word;user-select:all}
+.card a.v{text-decoration:none;user-select:text}.card a.v:hover{color:#fff}
+.card .hint{font-size:14px;color:#8E9589}
+.card .v.todo{color:#8E9589;font-family:var(--body);font-size:16px;border-bottom:1px dashed #5A6057;justify-self:start}
+
+footer{background:var(--night);color:#9FA699;font-size:14px;border-top:1px solid #2A2F29}
+footer .wrap{display:grid;gap:28px;padding-block:44px max(44px,env(safe-area-inset-bottom,0px));grid-template-columns:1fr}
+@media (min-width:760px){footer .wrap{grid-template-columns:2fr 1fr 1fr}}
+footer .mark{color:var(--on-night);font-size:20px;padding:0}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--on-night)}
+footer small{display:block;margin-top:12px;max-width:44ch;line-height:1.6}
+
+/* soft corners on every framed photo */
+.pair img,.room .ph,.out img,.grid figure,.loc img{border-radius:var(--r)}
+.room .ph img{border-radius:0}
+.tags li{border-radius:99px}
+.tabs{border-radius:99px}.tabs button{border-radius:99px}
+.lb img{border-radius:10px}
+
+/* every detail: bento cards */
+.details{display:grid;gap:14px;grid-template-columns:1fr}
+@media (min-width:640px){.details{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1000px){.details{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.dc{position:relative;border-radius:var(--r);padding:clamp(26px,2.6vw,36px);background:var(--card);color:var(--ink);display:flex;flex-direction:column;gap:12px;min-height:220px;overflow:hidden;transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
+.dc:hover{transform:translateY(-4px);box-shadow:0 18px 40px -24px rgba(30,30,25,.35)}
+.dc.w2{grid-column:span 2}
+@media (max-width:639px){.dc.w2{grid-column:auto}}
+.dc .k{font:500 11px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.dc h3{font-size:clamp(23px,2vw,28px);line-height:1.2;padding-right:56px}
+.dc p{font-size:15.5px;line-height:1.6;color:var(--muted)}
+.dc .k{display:flex;align-items:center;gap:10px}
+.dc .k b{font-weight:500;color:inherit;opacity:.55}
+.dc .k b::after{content:"";display:inline-block;width:18px;height:1px;background:currentColor;vertical-align:middle;margin-left:10px;opacity:.6}
+.dc h3{padding-right:0}
+.dc.grove{background:var(--grove)}.dc.slate{background:var(--slate)}.dc.sand{background:var(--sand);color:#2A2A22}
+.dc.sand .k,.dc.sand p{color:rgba(42,42,34,.75)}
+.dc.grove,.dc.slate{color:var(--on-color)}
+.dc.grove .k,.dc.slate .k,.dc.grove p,.dc.slate p{color:rgba(243,242,236,.8)}
+.details-head{text-align:center;margin:0 auto clamp(40px,5vw,64px);max-width:760px;display:grid;gap:16px;justify-items:center}
+.details-head h2{font-size:clamp(38px,5vw,68px);line-height:1.05}
+
+/* motion on scroll: content starts visible; only items below the fold are primed, then glide in */
+.js .rv.pre{opacity:0;transform:translateY(38px)}
+.js .rv{transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rv-img.pre{opacity:0;transform:scale(.94);clip-path:inset(8% 8% 8% 8% round var(--r))}
+.js .rv-img{transition:opacity 1.1s ease,transform 1.4s cubic-bezier(.2,.7,.2,1),clip-path 1.4s cubic-bezier(.2,.7,.2,1);clip-path:inset(0 0 0 0 round var(--r))}
+.band img{will-change:transform}
+@media (prefers-reduced-motion:reduce){.js .rv.pre,.js .rv-img.pre{opacity:1;transform:none;clip-path:none}}
+
+.drone{position:relative}
+.drone video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r);background:var(--plaster)}
+.vbtn{position:absolute;top:14px;right:14px;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(14,17,15,.45);border:1px solid rgba(255,255,255,.35);border-radius:99px;padding:9px 14px;cursor:pointer;backdrop-filter:blur(6px)}
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:40;background:rgba(10,12,10,.96);display:flex;align-items:center;justify-content:center;padding:max(64px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(64px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:14px;max-width:min(100%,1400px)}
+.lb img{max-height:calc(100vh - 180px);max-width:100%;width:auto}
+.lb figcaption{color:#E7E6DF;font-size:15px;text-align:center;max-width:60ch}
+.lb .count{font:400 12px/1 var(--mono);letter-spacing:.14em;color:#9FA699}
+.lb button{position:absolute;background:none;color:#fff;border:1px solid rgba(255,255,255,.3);width:48px;height:48px;font-size:22px;cursor:pointer}
+.lb button:hover{background:rgba(255,255,255,.1)}
+.lb .x{top:calc(16px + env(safe-area-inset-top,0px));right:calc(16px + env(safe-area-inset-right,0px))}
+.lb .p{left:calc(14px + env(safe-area-inset-left,0px));top:calc(50% - 24px)}
+.lb .n{right:calc(14px + env(safe-area-inset-right,0px));top:calc(50% - 24px)}
+@media (max-width:700px){.lb .p,.lb .n{top:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px))}}
+</style>
+</head>
+<body>
+<header id="hdr">
+  <div class="wrap">
+    <a class="mark" href="#top">Eloria</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-controls="menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav id="menu">
+      <button class="close" id="closeMenu" aria-label="Close menu">×</button>
+      <a href="#villa">The villa</a>
+      <a href="#spaces">Spaces</a>
+      <a href="#outdoors">Outdoors</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#location">Location</a>
+      <a class="cta" href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <picture>
+      <source media="(max-width:700px)" srcset="hero-tall.jpg">
+      <img src="hero-wide.jpg" alt="Architect's render of Eloria: a white arched gateway in a dry-stone wall, and the two-storey villa behind" fetchpriority="high">
+    </picture>
+    <div class="wrap">
+      <div class="eyebrow">Vamos · Chania · Crete</div>
+      <h1>Eloria</h1>
+      <p class="lede">A private villa of minimal Mediterranean luxury, a short walk from the old village, facing the White Mountains.</p>
+      <div class="hero-foot">
+        <ul class="stats">
+          <li><b>5</b><span>Bedrooms</span></li>
+          <li><b>1,000 m²</b><span>Private plot</span></li>
+          <li><b>Lap pool</b><span>&amp; gardens</span></li>
+          <li><b>Lefka Ori</b><span>Mountain views</span></li>
+        </ul>
+        <div>
+          <div class="status"><i></i>Under construction · Opening soon</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="villa">
+    <div class="wrap">
+      <div class="intro">
+        <div>
+          <div class="eyebrow">The villa</div>
+          <h2>Quiet architecture among the <em>olive trees</em> of western Crete.</h2>
+        </div>
+        <div class="prose">
+          <p>Eloria is taking shape on a 1,000 m² plot at the edge of Vamos, one of the oldest villages of Apokoronas. The village's stone lanes, tavernas and kafeneia are a short walk away, and from the garden the view opens towards the peaks of the Lefka Ori, the White Mountains.</p>
+          <p>The architecture is deliberately calm: white plastered volumes, tall arches, walls of local stone and timber pergolas. Inside, pale stone-look floors, warm walnut joinery and simple brushed-steel fittings.</p>
+          <p>Swim in the morning, walk to the village for coffee, and gather around the outdoor kitchen as the light softens over the hills.</p>
+        </div>
+      </div>
+      <div class="pair">
+        <figure class="a">
+          <img src="aerial.jpg" alt="Render from above: a pergola terrace on a stone wall, the outdoor kitchen and the lap pool" loading="lazy">
+          <figcaption class="cap">Render · the pergola terrace and pool</figcaption>
+        </figure>
+        <figure class="b">
+          <img src="arch-person.jpg" alt="Sitting on the old stone wall in front of Eloria's arched façade" loading="lazy">
+          <figcaption class="cap">On site · under the arch, autumn 2026</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <img src="band-render.jpg" alt="" loading="lazy">
+    <div class="wrap">
+      <blockquote>Stone, white light and olive wood, in the green hills of Apokoronas.</blockquote>
+      <div class="eyebrow">Eloria is being built now · Opening soon</div>
+    </div>
+  </section>
+
+  <section class="block" id="spaces">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Spaces</div>
+        <h2>One villa, two private retreats</h2>
+        <p>Five bedrooms in all, arranged so a group can share the pool and long dinners while everyone keeps their own space. Ideal for families and groups of friends.</p>
+      </div>
+      <div class="rooms">
+        <article class="room">
+          <div class="ph"><img src="living.jpg" alt="The bright living room of the main house, with wide glass doors" loading="lazy"></div>
+          <div class="meta">Ground floor · about 120 m²</div>
+          <h3>The main house</h3>
+          <p>Open living and dining room, a fully equipped kitchen, and three bedrooms. Glass doors open straight onto the pool terrace.</p>
+          <ul class="tags"><li>3 bedrooms</li><li>Open-plan living</li><li>Full kitchen</li></ul>
+        </article>
+        <article class="room">
+          <div class="ph"><img src="walnut.jpg" alt="Walnut kitchen units in one of the upper-floor studios" loading="lazy"></div>
+          <div class="meta">Upper floor · about 40 m² each</div>
+          <h3>Two retreat studios</h3>
+          <p>Two fully independent studios upstairs, each with its own kitchen. A hideaway for a couple, grown-up children or friends who like slow mornings.</p>
+          <ul class="tags"><li>2 bedrooms</li><li>Own kitchens</li><li>Private</li></ul>
+        </article>
+        <article class="room">
+          <div class="ph"><img src="floorplan-tall.jpg" alt="Ground floor plan of the main house, the pool and the outdoor dining area" loading="lazy"></div>
+          <div class="meta">The plan</div>
+          <h3>Indoors meets outdoors</h3>
+          <p>The house wraps around the pool on two sides, with covered terraces at each door and the outdoor kitchen across the water.</p>
+          <ul class="tags"><li>Covered terraces</li><li>Pool-side living</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="outdoors" style="padding-top:0">
+    <div class="wrap out">
+      <figure>
+        <img src="siteplan-wide.jpg" alt="Render of the plot from above: parking, gardens, the house, the lap pool and pergolas" loading="lazy">
+        <figcaption class="cap">Render · the whole plot from above</figcaption>
+      </figure>
+      <div>
+        <div class="head" style="margin-bottom:28px">
+          <div class="eyebrow">Outdoors</div>
+          <h2>Life happens outside</h2>
+          <p>Most of the plot is garden. Stone walls, lawns and olive trees surround a long lap pool, with shade and a place to eat wherever you are.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="details" style="padding-top:0">
+    <div class="wrap">
+      <div class="details-head rv">
+        <div class="eyebrow">The villa</div>
+        <h2>Every detail, considered</h2>
+      </div>
+      <div class="details">
+        <article class="dc grove w2 rv"><div class="k"><b>01</b>Lap pool</div><h3>A long pool among the olive trees</h3><p>Room for real laps in the morning and lazy afternoons after. A sun deck and loungers line the water, with the garden all around.</p></article>
+        <article class="dc rv" style="--d:.08s"><div class="k"><b>02</b>Main house</div><h3>Open-plan living</h3><p>Living, dining and a fully equipped kitchen in warm walnut, opening straight onto the pool terrace.</p></article>
+        <article class="dc sand rv" style="--d:.16s"><div class="k"><b>03</b>Outdoor kitchen</div><h3>Barbecue under the pergola</h3><p>An outdoor kitchen beside a long table, made for slow Cretan dinners.</p></article>
+        <article class="dc rv"><div class="k"><b>04</b>Retreat studios</div><h3>Together, and apart</h3><p>Two independent studios upstairs, each with its own kitchen.</p></article>
+        <article class="dc rv" style="--d:.08s"><div class="k"><b>05</b>Gardens</div><h3>Olives, stone and shade</h3><p>Lawns, Cretan planting and pergolas across a 1,000 m² plot.</p></article>
+        <article class="dc slate w2 rv" style="--d:.16s"><div class="k"><b>06</b>The village</div><h3>Walk to dinner in Vamos</h3><p>Stone lanes, tavernas and kafeneia are a short walk from the gate, with the White Mountains on the horizon. Leave the car at home and stroll back under the stars.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="gallery" style="padding-top:0">
+    <div class="wrap">
+      <div class="gal-top">
+        <div class="head">
+          <div class="eyebrow">Gallery</div>
+          <h2>The design, and the build</h2>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Photo sets">
+          <button role="tab" id="tab-site" aria-selected="true" aria-controls="set-site">On site</button>
+          <button role="tab" id="tab-design" aria-selected="false" aria-controls="set-design">The design</button>
+        </div>
+      </div>
+      <div class="grid" id="set-site" role="tabpanel" aria-labelledby="tab-site">
+        <figure class="big"><button aria-label="Enlarge: first lights"><img src="night.jpg" alt="Eloria lit up at night, the upstairs arch glowing" loading="lazy"></button><figcaption>First lights on, after dark</figcaption></figure>
+        <figure class="tall"><button aria-label="Enlarge: the view"><img src="view-arch.jpg" alt="View through the upstairs arch to palms, olive trees and hills" loading="lazy"></button><figcaption>The view through the arch</figcaption></figure>
+        <figure><button aria-label="Enlarge: walnut kitchen"><img src="walnut.jpg" alt="Walnut kitchen units in a studio" loading="lazy"></button><figcaption>Walnut kitchens in the studios</figcaption></figure>
+        <figure><button aria-label="Enlarge: stone wall"><img src="stone.jpg" alt="A dry-stone wall being laid by hand" loading="lazy"></button><figcaption>Local stone, laid by hand</figcaption></figure>
+        <figure class="wide"><button aria-label="Enlarge: garden façade"><img src="rear.jpg" alt="The garden façade under construction with the pool shell in front" loading="lazy"></button><figcaption>The garden façade. Walls up, windows in.</figcaption></figure>
+        <figure class="tall"><button aria-label="Enlarge: site supervisor"><img src="dog-house.jpg" alt="A hound standing in front of the house" loading="lazy"></button><figcaption>The site supervisor, on rounds</figcaption></figure>
+        <figure><button aria-label="Enlarge: lap pool"><img src="pool.jpg" alt="The empty lap pool shell in front of the house" loading="lazy"></button><figcaption>The lap pool, waiting for water</figcaption></figure>
+        <figure class="tall"><button aria-label="Enlarge: bedroom"><img src="bedroom.jpg" alt="A bright bedroom with sliding doors to the garden" loading="lazy"></button><figcaption>Morning light in a bedroom</figcaption></figure>
+        <figure class="wide"><button aria-label="Enlarge: terrace"><img src="terrace.jpg" alt="Upstairs terrace with new dry-stone parapet walls" loading="lazy"></button><figcaption>The upstairs terrace takes shape</figcaption></figure>
+        <figure class="tall"><button aria-label="Enlarge: vaulted ceiling"><img src="vault.jpg" alt="Curved vaulted ceiling in the living room" loading="lazy"></button><figcaption>The vaulted living-room ceiling</figcaption></figure>
+        <figure><button aria-label="Enlarge: the arch"><img src="front-arch.jpg" alt="The arched entrance façade before finishing" loading="lazy"></button><figcaption>The arch, before plaster</figcaption></figure>
+        <figure class="wide"><button aria-label="Enlarge: from the hill"><img src="hillside.jpg" alt="Eloria among the olive groves, seen from the hill" loading="lazy"></button><figcaption>From the hill, 7 October 2026</figcaption></figure>
+        <figure><button aria-label="Enlarge: floors"><img src="living.jpg" alt="Living room with new floors and a dog lying in the sun" loading="lazy"></button><figcaption>Floors down, nap approved</figcaption></figure>
+        <figure><button aria-label="Enlarge: bathroom"><img src="shower.jpg" alt="Brushed steel shower mixer on a stone-look wall" loading="lazy"></button><figcaption>Brushed steel in the bathrooms</figcaption></figure>
+      </div>
+      <div class="grid" id="set-design" role="tabpanel" aria-labelledby="tab-design" hidden>
+        <figure class="big"><button aria-label="Enlarge: the entrance"><img src="hero-wide.jpg" alt="Render of the entrance gateway and the villa" loading="lazy"></button><figcaption>The entrance from the lane</figcaption></figure>
+        <figure class="tall"><button aria-label="Enlarge: the plot from above"><img src="siteplan.jpg" alt="Render of the whole plot from above" loading="lazy"></button><figcaption>The plot from above</figcaption></figure>
+        <figure class="tall"><button aria-label="Enlarge: ground floor plan"><img src="floorplan.jpg" alt="Ground floor plan" loading="lazy"></button><figcaption>Ground floor plan</figcaption></figure>
+        <figure class="wide"><button aria-label="Enlarge: pool and dining pergola"><img src="band-render.jpg" alt="Render of the lap pool, the arched dining pergola and the outdoor kitchen" loading="lazy"></button><figcaption>Pool, dining pergola and outdoor kitchen</figcaption></figure>
+        <figure class="wide"><button aria-label="Enlarge: pergola terrace"><img src="aerial.jpg" alt="Render of the pergola terrace, outdoor kitchen and pool" loading="lazy"></button><figcaption>Pergola terrace and outdoor kitchen</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block loc" id="location">
+    <div class="wrap inner">
+      <div>
+        <div class="eyebrow">Location</div>
+        <h2>Vamos, Apokoronas</h2>
+        <p class="coords" style="margin-top:16px">35.41° N · 24.20° E</p>
+      </div>
+      <div class="prose">
+        <figure class="drone">
+          <video src="drone.mp4" poster="drone-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Drone flight over Eloria and the olive groves of Vamos, with the White Mountains behind"></video>
+          <button class="vbtn" type="button" aria-label="Pause video">Pause</button>
+          <figcaption class="cap">From above · Eloria among the olive groves, the Lefka Ori behind</figcaption>
+        </figure>
+        <p><strong>A real Cretan village on foot.</strong> Vamos is a traditional village in the green hills of Apokoronas, east of Chania. Its restored stone houses, small squares and tavernas are within walking distance, so you can leave the car behind for dinner.</p>
+        <ul class="near">
+          <li>Old village of Vamos <span>Walking distance</span></li>
+          <li>Lefka Ori, the White Mountains <span>In view</span></li>
+          <li>North coast beaches <span>Short drive</span></li>
+          <li>Chania old town <span>Day trip</span></li>
+        </ul>
+        <p><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Vamos%2C+Crete" target="_blank" rel="noopener">View on Google Maps ↗</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing" id="contact">
+    <div class="wrap">
+      <div class="eyebrow">Opening soon</div>
+      <h2>Be among the first to stay at Eloria.</h2>
+      <p>For early enquiries, opening dates, or simply to say hello, contact us directly.</p>
+      <div class="cards">
+        <div class="card"><div class="eyebrow">Email</div><a class="v" href="mailto:info@eloriavilla.com">info@eloriavilla.com</a><span class="hint">For enquiries and opening dates</span></div>
+        <div class="card"><div class="eyebrow">Phone</div><a class="v" href="tel:+306972028937">+30 697 202 8937</a><span class="hint">Call us, in Greek or English</span></div>
+        <div class="card"><div class="eyebrow">WhatsApp</div><a class="v" href="https://wa.me/306972028937" target="_blank" rel="noopener">+30 697 202 8937</a><span class="hint">Message us on WhatsApp ↗</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="mark" href="#top">Eloria</a>
+      <small>A minimal Mediterranean villa in Vamos, Crete. Renders show the architect's design; the finished villa may differ in detail.</small>
+    </div>
+    <ul>
+      <li><a href="#villa">The villa</a></li>
+      <li><a href="#spaces">Spaces</a></li>
+      <li><a href="#outdoors">Outdoors</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+    </ul>
+    <ul>
+      <li><a href="#location">Location</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li>eloriavilla.com</li>
+    </ul>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="x" aria-label="Close">×</button>
+  <button class="p" aria-label="Previous photo">‹</button>
+  <figure><img id="lbimg" alt=""><figcaption id="lbcap"></figcaption><div class="count" id="lbcount"></div></figure>
+  <button class="n" aria-label="Next photo">›</button>
+</div>
+
+<script>
+(function(){
+  // motion on scroll: prime only what is below the fold, reveal as it enters
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('js');
+  function mark(sel,cls,stagger){
+    document.querySelectorAll(sel).forEach(function(el,k){
+      el.classList.add(cls);
+      if(stagger&&!el.style.getPropertyValue('--d')){var sib=[].indexOf.call(el.parentNode.children,el);el.style.setProperty('--d',(Math.min(sib,4)*0.09)+'s');}
+    });
+  }
+  mark('.intro > *, .head, .gal-top .tabs, .loc .prose > *, .closing .wrap > *, .band blockquote, .band .eyebrow, .room > :not(.ph), .out > div','rv',true);
+  mark('.pair figure, .out figure, .room .ph, .grid figure','rv-img',true);
+  var items=[].slice.call(document.querySelectorAll('.rv,.rv-img'));
+  if(!reduce&&'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    items.forEach(function(el){var r=el.getBoundingClientRect();if(r.top>window.innerHeight*0.92&&el.offsetParent!==null){el.classList.add('pre');io.observe(el);}});
+    // gallery items revealed when a tab is switched
+    document.querySelectorAll('.tabs [role=tab]').forEach(function(t){t.addEventListener('click',function(){setTimeout(function(){document.querySelectorAll('.grid:not([hidden]) .pre').forEach(function(el){el.classList.remove('pre')});},30);});});
+    // gentle parallax on the photo band and hero
+    var band=document.querySelector('.band'),bimg=band&&band.querySelector('img'),himg=document.querySelector('.hero picture');
+    var ticking=false;
+    function par(){ticking=false;var vh=window.innerHeight;
+      if(bimg){var r=band.getBoundingClientRect();if(r.bottom>0&&r.top<vh){var p=(r.top+r.height/2-vh/2)/vh;bimg.style.transform='translateY('+(p*-60)+'px) scale(1.15)';}}
+      if(himg&&window.scrollY<vh*1.2){himg.style.transform='translateY('+(window.scrollY*0.28)+'px)';}
+    }
+    window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(par);}},{passive:true});par();
+  }
+
+  // drone video: play/pause, respect reduced motion
+  var vid=document.querySelector('.drone video'),vb=document.querySelector('.vbtn');
+  if(vid&&vb){
+    function lab(){var p=vid.paused;vb.textContent=p?'Play':'Pause';vb.setAttribute('aria-label',p?'Play video':'Pause video');}
+    if(reduce){vid.removeAttribute('autoplay');vid.pause();}
+    vb.onclick=function(){if(vid.paused){var pr=vid.play();if(pr&&pr.catch)pr.catch(function(){});}else vid.pause();};
+    vid.addEventListener('play',lab);vid.addEventListener('pause',lab);lab();
+  }
+
+  // header: solid after leaving the hero
+  var hdr=document.getElementById('hdr');
+  function onScroll(){hdr.classList.toggle('solid',window.scrollY>window.innerHeight*0.6);}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // mobile menu
+  var menu=document.getElementById('menu'),burger=document.getElementById('burger');
+  function setMenu(o){menu.classList.toggle('open',o);burger.setAttribute('aria-expanded',o);}
+  burger.onclick=function(){setMenu(true)};
+  document.getElementById('closeMenu').onclick=function(){setMenu(false)};
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false)})});
+
+  // gallery tabs
+  var tabs=[].slice.call(document.querySelectorAll('.tabs [role=tab]'));
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    tabs.forEach(function(o){var on=o===t;o.setAttribute('aria-selected',on);document.getElementById(o.getAttribute('aria-controls')).hidden=!on;});
+  });});
+
+  // lightbox, per visible set
+  var lb=document.getElementById('lb'),img=document.getElementById('lbimg'),cap=document.getElementById('lbcap'),cnt=document.getElementById('lbcount');
+  var list=[],i=0,last=null;
+  function show(k){i=(k+list.length)%list.length;var f=list[i],im=f.querySelector('img');img.src=im.src;img.alt=im.alt;cap.textContent=f.querySelector('figcaption').textContent;cnt.textContent=(i+1)+' / '+list.length;}
+  document.querySelectorAll('.grid').forEach(function(g){
+    var figs=[].slice.call(g.querySelectorAll('figure'));
+    figs.forEach(function(f,k){f.querySelector('button').addEventListener('click',function(){list=figs;last=this;show(k);lb.hidden=false;lb.querySelector('.x').focus();});});
+  });
+  function close(){lb.hidden=true;if(last)last.focus();}
+  lb.querySelector('.x').onclick=close;
+  lb.querySelector('.p').onclick=function(){show(i-1)};
+  lb.querySelector('.n').onclick=function(){show(i+1)};
+  lb.addEventListener('click',function(e){if(e.target===lb)close();});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){if(!lb.hidden)close();setMenu(false);}
+    if(lb.hidden)return;
+    if(e.key==='ArrowLeft')show(i-1);if(e.key==='ArrowRight')show(i+1);
+  });
+  var x0=null;lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  lb.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>50)show(d<0?i+1:i-1);x0=null;});
+})();
+</script>
+
+</body>
+</html>
